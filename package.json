@@ -1,0 +1,41 @@
+{
+  "name": "komga",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP connector for a self-hosted Komga server. Calls the HTTP API only. TypeScript 6 is pinned because typescript-eslint strict type-aware lint needs the JS compiler API, which TypeScript 7 does not ship.",
+  "bin": {
+    "komga": "dist/index.js"
+  },
+  "scripts": {
+    "live-check": "node scripts/live-check.mjs",
+    "build": "tsc -p tsconfig.build.json && chmod +x dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "ci": "npm run typecheck && npm run lint && npm run test && npm run build",
+    "start": "node dist/index.js",
+    "start:http": "node dist/index.js --http",
+    "gen:operations": "node scripts/gen-operations.mjs",
+    "new": "bash scripts/new-connector.sh"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^22.19.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.5"
+  }
+}
